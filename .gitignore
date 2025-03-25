@@ -1,0 +1,58 @@
+# Flutter / Dart
+**/build/
+**/.dart_tool/
+**/.packages
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/.gradle/
+**/.idea/
+**/.vscode/
+**/.DS_Store
+**/pubspec.lock
+**/.metadata
+
+# Python / Flask
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+instance/
+*.sqlite3
+*.db
+*.log
+
+# LangChain
+*.json
+*.pickle
+*.pkl
+*.h5
+**/ml_models/
+**/vector_store/
+
+# General
+*.log
+*.env
+.env.local
+.env.production
+.env.development
+secrets.json
+config.yaml
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs
+.idea/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*.swp
