@@ -49,6 +49,10 @@ class Configs(BaseSettings):
         database=ENV_DATABASE_MAPPER[ENV],
     )
 
+    BIBLE_API_KEY: str = os.getenv("BIBLE_API_KEY")
+    BIBLE_API_BASE_URL: str = os.getenv("BIBLE_API_BASE_URL")
+    WEB_BIBLE_ID: str = os.getenv("WEB_BIBLE_ID")
+
     class Config:
         case_sensitive = True
 

@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 
+from app.api.endpoints.bible import router as bible_router
+
 routers = APIRouter()
-router_list = []
+router_list = [bible_router]
 
 for router in router_list:
-    router.include_router(router)
+    routers.include_router(router)

@@ -22,7 +22,7 @@ class AppCreator:
                 CORSMiddleware,
                 allow_origins=[str(origin) for origin in configs.BACKEND_CORS_ORIGINS],
                 allow_credentials=True,
-                allow_methods=["GET", "POST", "PUT", "PATCH", "DELETE"],
+                allow_methods=["GET"], # for now as there is no user or chatbot ability
                 allow_headers=["*"],
             )
 
