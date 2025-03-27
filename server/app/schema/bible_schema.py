@@ -1,15 +1,15 @@
 from pydantic import BaseModel
+from typing import List
 
 
-class BookInfo(BaseModel):
+class InnerChapter(BaseModel):
+    id: str
+    number: str
+
+class BooksChapters(BaseModel):
     id: str
     name: str
-    nameLong: str
-
-class ChapterInfo(BaseModel):
-    id: str
-    bookId: str
-    number: str
+    chapters: List[InnerChapter]
 
 class Chapter(BaseModel):
     id: str
