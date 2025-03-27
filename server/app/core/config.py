@@ -50,6 +50,7 @@ class Configs(BaseSettings):
     )
 
     BIBLE_API_KEY: str = os.getenv("BIBLE_API_KEY")
+    API_HEADER: dict = {"api-key": BIBLE_API_KEY}
     BIBLE_API_BASE_URL: str = os.getenv("BIBLE_API_BASE_URL")
     WEB_BIBLE_ID: str = os.getenv("WEB_BIBLE_ID")
 
