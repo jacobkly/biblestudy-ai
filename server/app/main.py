@@ -13,16 +13,16 @@ class AppCreator:
         self.app = FastAPI(
             title=configs.PROJECT_NAME,
             openapi_url=f"{configs.API}/openapi.json",
-            version="0.0.1"
+            version="0.0.1",
         )
-        
+
         # set CORS
         if configs.BACKEND_CORS_ORIGINS:
             self.app.add_middleware(
                 CORSMiddleware,
                 allow_origins=[str(origin) for origin in configs.BACKEND_CORS_ORIGINS],
                 allow_credentials=True,
-                allow_methods=["GET"], # for now as there is no user or chatbot ability
+                allow_methods=["GET"],  # for now as there is no user or chatbot ability
                 allow_headers=["*"],
             )
 
@@ -30,8 +30,9 @@ class AppCreator:
         @self.app.get("/")
         def root():
             return "FastAPI server is working!"
-        
+
         self.app.include_router(routers, prefix=configs.API)
+
 
 app_creator = AppCreator()
 app = app_creator.app

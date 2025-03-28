@@ -6,10 +6,12 @@ class InnerChapter(BaseModel):
     id: str
     number: str
 
+
 class BooksChapters(BaseModel):
     id: str
     name: str
     chapters: List[InnerChapter]
+
 
 class Chapter(BaseModel):
     id: str

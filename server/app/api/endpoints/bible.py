@@ -12,7 +12,8 @@ router = APIRouter(
 )
 
 bible_service = BibleService(api_base_url=configs.BIBLE_API_BASE_URL)
-    
+
+
 # get all books and respective chapters of the bible
 @router.get("/books/chapters", response_model=List[BooksChapters])
 def get_books_chapters():
@@ -20,6 +21,7 @@ def get_books_chapters():
         return bible_service.get_books_chapters()
     except requests.HTTPError as e:
         raise HTTPException(status_code=e.response.status_code, detail=e.response.text)
+
 
 # get an entire chapter of a book in HTML (other options are JSON or plain text) with some extra information
 @router.get("/chapters/{chapterId}")
