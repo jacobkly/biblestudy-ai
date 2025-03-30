@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class NavigationMenu extends StatelessWidget {
+class CustomNavBar extends StatelessWidget {
   final int selectedIndex;
-  final Function(int) onDestinationSelected;
+  final void Function(int) onItemTapped;
 
-  const NavigationMenu({
+  const CustomNavBar({
     super.key,
     required this.selectedIndex,
-    required this.onDestinationSelected,
+    required this.onItemTapped,
   });
 
   @override
   Widget build(BuildContext context) {
     return NavigationBar(
-      backgroundColor: Theme.of(context).colorScheme.surfaceBright,
+      backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
       selectedIndex: selectedIndex,
-      onDestinationSelected: onDestinationSelected,
+      onDestinationSelected: onItemTapped,
       destinations: const [
         NavigationDestination(icon: Icon(Icons.home), label: "Home"),
         NavigationDestination(icon: Icon(Icons.book), label: "Bible"),
