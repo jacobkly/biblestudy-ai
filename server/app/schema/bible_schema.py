@@ -1,16 +1,9 @@
 from pydantic import BaseModel
-from typing import List
-
-
-class InnerChapter(BaseModel):
-    id: str
-    number: str
-
 
 class BooksChapters(BaseModel):
     id: str
     name: str
-    chapters: List[InnerChapter]
+    num_chapters: str
 
 
 class Chapter(BaseModel):

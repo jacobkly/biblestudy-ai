@@ -15,12 +15,9 @@ class BibleService:
 
         data = response.json().get("data", [])
         for book in data:
-            book = remove_keys(book, ["bibleId", "abbreviation", "nameLong"])
-
-            chapters = book.get("chapters", [])
-            del chapters[0]  # remove unnecessary book intro chapter
-            for chapter in chapters:
-                chapter = remove_keys(chapter, ["bibleId", "bookId", "position"])
+            num_chapters = book["chapters"][-1]["number"]
+            book["num_chapters"] = num_chapters
+            book = remove_keys(book, ["bibleId", "abbreviation", "nameLong", "chapters"])
 
         return data
 
