@@ -1,4 +1,4 @@
-import 'package:client/components/custom_navbar.dart';
+import 'package:client/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {

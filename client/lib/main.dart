@@ -1,10 +1,13 @@
-import 'package:client/pages/bible_page.dart';
-import 'package:client/pages/home_page.dart';
-import 'package:client/pages/settings_page.dart';
+import 'package:client/screens/bible_page.dart';
+import 'package:client/screens/home_page.dart';
+import 'package:client/screens/settings_page.dart';
+import 'package:client/services/bible_service.dart';
 import 'package:client/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  BibleService().loadBibleStructureData();
   runApp(const MyApp());
 }
 

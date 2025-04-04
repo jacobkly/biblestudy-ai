@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:client/components/custom_navbar.dart';
+import 'package:client/widgets/book_chapter_indicator.dart';
+import 'package:client/widgets/custom_navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart' as http;
@@ -20,9 +21,17 @@ class BiblePage extends StatefulWidget {
 }
 
 class _BiblePageState extends State<BiblePage> {
-  var _genOne;
+  String selectedChapter = "GEN.1"; // default book and chapter
+  var chapterData;
 
-  void fetchGenesisOne() async {
+  void onChapterSelected(String chapterId) {
+    setState(() {
+      selectedChapter = chapterId;
+    });
+    fetchBibleChapter();
+  }
+
+  void fetchBibleChapter() async {
     try {
       // android emulator endpoint URL
       final response = await http.get(
@@ -33,7 +42,7 @@ class _BiblePageState extends State<BiblePage> {
         final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
         setState(() {
-          _genOne = jsonData["content"];
+          chapterData = jsonData["content"];
         });
       } else {
         print("Failed to load content. Status code: ${response.statusCode}");
@@ -46,25 +55,27 @@ class _BiblePageState extends State<BiblePage> {
   @override
   void initState() {
     super.initState();
-    fetchGenesisOne();
+    if (chapterData == null) {
+      fetchBibleChapter();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Bible"),
+        title: BookChapterIndicator(),
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         centerTitle: true,
       ),
       body:
-          _genOne == null
+          chapterData == null
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Html(
-                    data: _genOne, // The content from the API
+                    data: chapterData, // The content from the API
                     style: {
                       "p": Style(
                         fontSize: FontSize.larger,
