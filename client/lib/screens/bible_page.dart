@@ -21,12 +21,14 @@ class BiblePage extends StatefulWidget {
 }
 
 class _BiblePageState extends State<BiblePage> {
-  String selectedChapter = "GEN.1"; // default book and chapter
-  var chapterData;
+  String selectedChapterId = "GEN.1"; // default book and chapter
+  String selectedChapterName = "Genesis 1"; // default book name and chapter
+  String? chapterData;
 
-  void onChapterSelected(String chapterId) {
+  void onChapterSelected(Map<String, dynamic> chapter) {
     setState(() {
-      selectedChapter = chapterId;
+      selectedChapterId = "${chapter["book_id"]}.${chapter["chapter_num"]}";
+      selectedChapterName = "${chapter["book_name"]} ${chapter["chapter_num"]}";
     });
     fetchBibleChapter();
   }
@@ -35,7 +37,9 @@ class _BiblePageState extends State<BiblePage> {
     try {
       // android emulator endpoint URL
       final response = await http.get(
-        Uri.parse("http://10.0.2.2:8000/api/bible/chapters/GEN.1"),
+        Uri.parse(
+          "http://10.0.2.2:8000/api/bible/chapters/${selectedChapterId}",
+        ),
       );
 
       if (response.statusCode == 200) {
@@ -64,7 +68,10 @@ class _BiblePageState extends State<BiblePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: BookChapterIndicator(),
+        title: BookChapterIndicator(
+          selectedChapter: selectedChapterName,
+          onChapterSelected: onChapterSelected,
+        ),
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         centerTitle: true,
       ),
@@ -75,7 +82,7 @@ class _BiblePageState extends State<BiblePage> {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Html(
-                    data: chapterData, // The content from the API
+                    data: chapterData,
                     style: {
                       "p": Style(
                         fontSize: FontSize.larger,
@@ -84,7 +91,10 @@ class _BiblePageState extends State<BiblePage> {
                       ),
                       "span.v": Style(
                         fontSize: FontSize.medium,
-                        color: Colors.blueAccent, // Styles verse numbers
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
+                        padding: HtmlPaddings.only(right: 2),
+                        verticalAlign: VerticalAlign.sup,
                       ),
                     },
                   ),
