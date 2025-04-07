@@ -1,7 +1,7 @@
 import requests
 
 from app.core.config import configs
-from app.util.bible_util import remove_keys
+from app.util.bible_util import remove_keys, text_to_html
 
 
 class BibleService:
@@ -22,7 +22,7 @@ class BibleService:
         return data
 
     def get_chapter(self, chapter_id: str):
-        url = f"{self.api_base_url}/bibles/{configs.WEB_BIBLE_ID}/chapters/{chapter_id}?content-type=html"
+        url = f"{self.api_base_url}/bibles/{configs.WEB_BIBLE_ID}/chapters/{chapter_id}?content-type=text"
         response = requests.get(url, headers=configs.API_HEADER)
         response.raise_for_status()
 
@@ -37,5 +37,8 @@ class BibleService:
                 "previous_id": chapter.pop("previous", {}).get("id"),
             }
         )
+
+        # convert plain text to HTML for the app
+        chapter["content"] = text_to_html(chapter["content"])
 
         return chapter
