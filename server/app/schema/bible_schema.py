@@ -9,6 +9,7 @@ class BooksChapters(BaseModel):
 class Chapter(BaseModel):
     id: str
     number: str
+    reference: str
     content: str
     next_id: str
     previous_id: str

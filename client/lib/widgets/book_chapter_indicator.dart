@@ -21,6 +21,8 @@ class BookChapterIndicator extends StatelessWidget {
         );
         if (result != null && result is Map<String, dynamic>) {
           onChapterSelected(result);
+        } else {
+          print("Invalid result from popup");
         }
       },
       child: Container(

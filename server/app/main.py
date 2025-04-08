@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.util.class_object import singleton
+from app.util.bible_util import populate_edge_ids
 from app.core.config import configs
 from app.api.routes import routers
 
@@ -25,6 +26,9 @@ class AppCreator:
                 allow_methods=["GET"],  # for now as there is no user or chatbot ability
                 allow_headers=["*"],
             )
+
+        # set Bible utilities
+        populate_edge_ids()
 
         # set routes
         @self.app.get("/")

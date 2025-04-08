@@ -29,15 +29,16 @@ class BooksChaptersPopup extends StatelessWidget {
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return Center(child: Text('No books available'));
           } else {
-            var books = snapshot.data;
+            var booksChapters = snapshot.data;
             return ListView.builder(
-              itemCount: books?.length,
+              itemCount: booksChapters?.length,
               itemBuilder: (context, index) {
-                var book = books?[index];
+                var chapter = booksChapters?[index];
                 return ExpansionTile(
-                  title: Text(book?["name"] ?? "Unknown"),
+                  title: Text(chapter?["name"] ?? "Unknown"),
                   children: [
                     GridView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       padding: const EdgeInsets.all(8),
                       gridDelegate:
@@ -47,22 +48,21 @@ class BooksChaptersPopup extends StatelessWidget {
                             mainAxisSpacing: 8,
                             childAspectRatio: 1,
                           ),
-                      itemCount: int.parse(book!["num_chapters"]!),
+                      itemCount: int.parse(chapter!["num_chapters"]!),
                       itemBuilder: (context, chapterIndex) {
                         return GestureDetector(
+                          behavior: HitTestBehavior.translucent,
                           onTap: () {
                             Navigator.pop(context, {
-                              "book_id": book["id"],
-                              "book_name": book["name"],
+                              "book_id": chapter["id"],
+                              "book_name": chapter["name"],
                               "chapter_num": chapterIndex + 1,
                             });
                           },
                           child: Container(
                             decoration: BoxDecoration(
                               color:
-                                  Theme.of(
-                                    context,
-                                  ).colorScheme.primaryContainer,
+                                  Theme.of(context).colorScheme.inversePrimary,
                               borderRadius: BorderRadius.circular(4),
                             ),
                             alignment: Alignment.center,
