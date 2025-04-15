@@ -51,10 +51,6 @@ class _SettingsPageState extends State<SettingsPage> {
           style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
         ),
       ),
-      bottomNavigationBar: CustomNavBar(
-        selectedIndex: widget.selectedIndex,
-        onItemTapped: widget.onItemTapped,
-      ),
     );
   }
 }

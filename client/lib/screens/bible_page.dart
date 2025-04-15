@@ -147,10 +147,6 @@ class _BiblePageState extends State<BiblePage> {
                   ),
                 ),
       ),
-      bottomNavigationBar: CustomNavBar(
-        selectedIndex: widget.selectedIndex,
-        onItemTapped: widget.onItemTapped,
-      ),
     );
   }
 }
