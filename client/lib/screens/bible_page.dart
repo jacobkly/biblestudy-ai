@@ -6,14 +6,7 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:http/http.dart' as http;
 
 class BiblePage extends StatefulWidget {
-  final int selectedIndex;
-  final void Function(int) onItemTapped;
-
-  const BiblePage({
-    super.key,
-    required this.selectedIndex,
-    required this.onItemTapped,
-  });
+  const BiblePage({super.key});
 
   @override
   State<BiblePage> createState() => _BiblePageState();
@@ -25,6 +18,8 @@ class _BiblePageState extends State<BiblePage> {
   String? nextChapterId;
   String? previousChapterId;
   String? chapterData;
+
+  final ScrollController _scrollController = ScrollController();
 
   void onChapterSelected(Map<String, dynamic> chapter) {
     setState(() {
@@ -49,6 +44,12 @@ class _BiblePageState extends State<BiblePage> {
           nextChapterId = jsonRes["next_id"];
           previousChapterId = jsonRes["previous_id"];
         });
+
+        _scrollController.animateTo(
+          0,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
       } else {
         print("Failed to load content. Status code: ${response.statusCode}");
       }
@@ -127,6 +128,7 @@ class _BiblePageState extends State<BiblePage> {
             chapterData == null
                 ? const Center(child: CircularProgressIndicator())
                 : SingleChildScrollView(
+                  controller: _scrollController,
                   child: Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: Html(

@@ -37,43 +37,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  // Widget _setScreen() {
-  //   switch (_selectedIndex) {
-  //     case 0:
-  //       return HomePage(
-  //         selectedIndex: _selectedIndex,
-  //         onItemTapped: _onItemTapped,
-  //       );
-  //     case 1:
-  //       return BiblePage(
-  //         selectedIndex: _selectedIndex,
-  //         onItemTapped: _onItemTapped,
-  //       );
-  //     case 2:
-  //       return SettingsPage(
-  //         selectedIndex: _selectedIndex,
-  //         onItemTapped: _onItemTapped,
-  //         onThemeChanged: toggleTheme,
-  //       );
-  //     default:
-  //       return HomePage(
-  //         selectedIndex: _selectedIndex,
-  //         onItemTapped: _onItemTapped,
-  //       );
-  //   }
-  // }
-
   @override
   void initState() {
     super.initState();
     _pages = [
-      HomePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped),
-      BiblePage(selectedIndex: _selectedIndex, onItemTapped: _onItemTapped),
-      SettingsPage(
-        selectedIndex: _selectedIndex,
-        onItemTapped: _onItemTapped,
-        onThemeChanged: toggleTheme,
-      ),
+      HomePage(),
+      BiblePage(),
+      SettingsPage(onThemeChanged: toggleTheme),
     ];
   }
 

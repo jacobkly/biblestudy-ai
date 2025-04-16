@@ -1,14 +1,10 @@
+import 'package:client/widgets/continue_reading.dart';
+import 'package:client/widgets/daily_verse.dart';
+import 'package:client/widgets/recommend_books.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  final int selectedIndex;
-  final void Function(int) onItemTapped;
-
-  const HomePage({
-    super.key,
-    required this.selectedIndex,
-    required this.onItemTapped,
-  });
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,10 +14,9 @@ class HomePage extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.surfaceContainerLow,
         centerTitle: true,
       ),
-      body: const Center(
-        child: Text(
-          "Home Page",
-          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [DailyVerse(), ContinueReading(), RecommendBooks()],
         ),
       ),
     );

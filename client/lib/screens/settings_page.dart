@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SettingsPage extends StatefulWidget {
-  final int selectedIndex;
-  final void Function(int) onItemTapped;
   final VoidCallback? onThemeChanged;
 
-  const SettingsPage({
-    super.key,
-    required this.selectedIndex,
-    required this.onItemTapped,
-    this.onThemeChanged,
-  });
+  const SettingsPage({super.key, this.onThemeChanged});
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
